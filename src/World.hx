@@ -54,7 +54,9 @@ class World extends luxe.Entity {
         } else {
           //trace(Utilities.vectorFromString(arr[1]));
           //trace(arr[1]);
-          clients.get(arr[0]).pos = Utilities.vectorFromString(arr[1]);
+          if( clients.get(arr[0])!=null){
+            clients.get(arr[0]).pos = Utilities.vectorFromString(arr[1]);
+          }
         }
       } else { //Sprite is dead
         if(clients.get(arr[0])!=null){
