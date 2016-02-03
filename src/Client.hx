@@ -5,8 +5,6 @@ import luxe.Vector;
 class Client extends Component {
   var cId : String=""; //client ID
   var oldPos : Vector;
-  var ip ="192.168.1.100";
-  var port = 3456;
 
 // TODO: 1- implement websocket on non-js targets
 // TODO: 2- rewrite class so that ip,port can be passed on creation
@@ -15,9 +13,14 @@ class Client extends Component {
   var socket : js.html.WebSocket;
 
   override function onadded() {
-
-      socket = new js.html.WebSocket("ws://" + ip + ":" + port);
-
+    var r = ~/^html/g;
+#if heroku
+    //link to your server
+    socket = new js.html.WebSocket("ws://luxe-net-test.herokuapp.com");
+#else
+    var port = 3456;
+    socket = new js.html.WebSocket("ws://localhost:"+port);
+#end
       // start updating only AFTER we know there is a connection
       socket.onopen = function(event:Dynamic){
           socket.send("QUERYID");

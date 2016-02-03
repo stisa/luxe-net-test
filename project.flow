@@ -4,7 +4,7 @@
     window: {
       width:960,
       height:640,
-      title:'Luxe Networked Test',
+      title:'Luxe Net Test',
       fullscreen:false,
       resizable:true,
       borderless:false
@@ -12,16 +12,17 @@
   },
 
   project : {
-    name : 'luxe-networked-test',
+    name : 'luxe-net-test',
     version : '0.0.1',
     author : 'stisa',
 
     app : {
-      name : 'luxe_networked_test',
+      name : 'luxe_net_test',
       package : 'it.stisa.luxenettest'
     },
 
     build : {
+      //defines : ['heroku'],
       dependencies : {
         luxe : '*',
       }
