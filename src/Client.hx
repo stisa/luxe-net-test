@@ -10,8 +10,6 @@ class Client extends Component {
 
 // TODO: 1- implement websocket on non-js targets
 // TODO: 2- rewrite class so that ip,port can be passed on creation
-// IDEA: the clients could be dumb, just like controllers, and a server written in haxe can display the characters
-// ... or maybe the clients gets a limited view while the server gets a complete view with all clients moving
 #if js
 
   var socket : js.html.WebSocket;
@@ -26,13 +24,11 @@ class Client extends Component {
           trace("2- client queryied ID");
       }
 
-      //trace the data we receive
       socket.onmessage = function(event:Dynamic){
         if(cId !="") {
           trace(event.data);
         }else{ //The first data we receive should be this client id
           cId=event.data;
-          trace("vent data: "+event.data);
           this.entity.name = this.entity.name+cId;
           //trace("3- "+this.entity.name+" connected");
         }
@@ -53,7 +49,6 @@ class Client extends Component {
       oldPos = this.pos;
       socket.send(""+oldPos);
       //trace(this.entity.name+" sent: "+oldPos);
-
     }
 
   } //update
@@ -61,6 +56,7 @@ class Client extends Component {
 #else
 // other targets code goes here
 #end
+
     override function onremoved(){
       socket.close();
     }

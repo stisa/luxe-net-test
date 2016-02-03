@@ -8,7 +8,7 @@ typedef WorldOptions = {
   > EntityOptions,
   var player: luxe.Sprite;
 }
-
+// The world maintains all the other clients
 class World extends luxe.Entity {
 	var worldClientC : WorldClient;
   var clients: Map<String,luxe.Sprite>;
@@ -31,10 +31,9 @@ class World extends luxe.Entity {
     public function addClient(cIdPos:String){ //should rename to updateclients
       var arr = cIdPos.split("///");
       var pId =player.get("client").cId;
-      //trace("cIdplayer: "+player.get("client").cId+"arr[0]: "+arr[0]);
-      //trace("arr3 :"+arr[2]);
-      if(arr[2]=="true"){
-        if( pId!= "" && arr[0] != pId  &&  clients.get(arr[0])== null ){
+
+      if (arr[2]=="true"){
+        if ( pId!= "" && arr[0] != pId  &&  clients.get(arr[0])== null ){
           trace("new client");
           var sprite : luxe.Sprite = new luxe.Sprite({
             name: "sprite"+arr[0],

@@ -4,7 +4,7 @@
     window: {
       width:960,
       height:640,
-      title:'luxe empty project',
+      title:'Luxe Networked Test',
       fullscreen:false,
       resizable:true,
       borderless:false
@@ -12,13 +12,13 @@
   },
 
   project : {
-    name : 'empty',
-    version : '1.0.0',
-    author : 'luxeengine',
+    name : 'luxe-networked-test',
+    version : '0.0.1',
+    author : 'stisa',
 
     app : {
-      name : 'luxe_empty',
-      package : 'com.luxeengine.empty'
+      name : 'luxe_networked_test',
+      package : 'it.stisa.luxenettest'
     },
 
     build : {
