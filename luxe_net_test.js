@@ -164,7 +164,6 @@ luxe_Component.prototype = $extend(luxe_ID.prototype,{
 	,__properties__: {set_origin:"set_origin",get_origin:"get_origin",set_scale:"set_scale",get_scale:"get_scale",set_rotation:"set_rotation",get_rotation:"get_rotation",set_pos:"set_pos",get_pos:"get_pos",set_entity:"set_entity",get_entity:"get_entity"}
 });
 var Client = function(_options) {
-	this.port = 3456;
 	this.cId = "";
 	luxe_Component.call(this,_options);
 };
@@ -174,15 +173,14 @@ Client.__super__ = luxe_Component;
 Client.prototype = $extend(luxe_Component.prototype,{
 	onadded: function() {
 		var _g = this;
-		var r = new EReg("^http","g");
-		var host = r.replace("http://luxe-net-test.herokuapp.com","ws");
-		this.socket = new WebSocket(host);
+		var r = new EReg("^html","g");
+		this.socket = new WebSocket("ws://luxe-net-test.herokuapp.com");
 		this.socket.onopen = function(event) {
 			_g.socket.send("QUERYID");
-			haxe_Log.trace("2- client queryied ID",{ fileName : "Client.hx", lineNumber : 26, className : "Client", methodName : "onadded"});
+			haxe_Log.trace("2- client queryied ID",{ fileName : "Client.hx", lineNumber : 27, className : "Client", methodName : "onadded"});
 		};
 		this.socket.onmessage = function(event1) {
-			if(_g.cId != "") haxe_Log.trace(event1.data,{ fileName : "Client.hx", lineNumber : 31, className : "Client", methodName : "onadded"}); else {
+			if(_g.cId != "") haxe_Log.trace(event1.data,{ fileName : "Client.hx", lineNumber : 32, className : "Client", methodName : "onadded"}); else {
 				_g.cId = event1.data;
 				_g.get_entity().set_name(_g.get_entity().get_name() + _g.cId);
 				var t;
@@ -518,7 +516,7 @@ LuxeApp.main = function() {
 	LuxeApp._conf.window.fullscreen = false;
 	LuxeApp._conf.window.resizable = true;
 	LuxeApp._conf.window.borderless = false;
-	LuxeApp._conf.window.title = "Luxe Networked Test";
+	LuxeApp._conf.window.title = "Luxe Net Test";
 	LuxeApp._snow = new snow_Snow();
 	LuxeApp._game = new Main();
 	LuxeApp._core = new luxe_Core(LuxeApp._game,LuxeApp._conf);
@@ -1790,11 +1788,10 @@ WorldClient.__super__ = luxe_Component;
 WorldClient.prototype = $extend(luxe_Component.prototype,{
 	onadded: function() {
 		var _g = this;
-		var r = new EReg("^http","g");
-		var host = r.replace("http://luxe-net-test.herokuapp.com","ws");
-		this.socket = new WebSocket(host);
+		var r = new EReg("^html","g");
+		this.socket = new WebSocket("ws://luxe-net-test.herokuapp.com");
 		this.socket.onopen = function(event) {
-			haxe_Log.trace("6- worldSocket open",{ fileName : "WorldClient.hx", lineNumber : 25, className : "WorldClient", methodName : "onadded"});
+			haxe_Log.trace("6- worldSocket open",{ fileName : "WorldClient.hx", lineNumber : 26, className : "WorldClient", methodName : "onadded"});
 			_g.open = true;
 		};
 		this.socket.onmessage = function(event1) {
