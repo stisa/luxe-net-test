@@ -17,7 +17,7 @@ class WorldClient extends Component {
   override function onadded() {
 
       socket = new js.html.WebSocket("ws://" + ip + ":" + port);
-
+      
       // start updating only AFTER we know there is a connection
       socket.onopen = function(event:Dynamic){
         trace("6- worldSocket open");
