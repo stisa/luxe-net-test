@@ -1767,7 +1767,7 @@ World.prototype = $extend(luxe_Entity.prototype,{
 				var sprite = new luxe_Sprite({ name : "sprite" + arr[0], pos : Luxe.core.screen.get_mid(), size : new phoenix_Vector(48,48,null,null), color : new phoenix_Color(Math.random(),Math.random(),Math.random())});
 				var sName = new luxe_Text({ pos : new phoenix_Vector(10,10,null,null), text : arr[0], parent : sprite, point_size : 36, align : 2, color : new phoenix_Color(0,0,0)});
 				this.clients.set(arr[0],sprite);
-			} else this.clients.get(arr[0]).set_pos(Utilities.vectorFromString(arr[1]));
+			} else if(this.clients.get(arr[0]) != null) this.clients.get(arr[0]).set_pos(Utilities.vectorFromString(arr[1]));
 		} else if(this.clients.get(arr[0]) != null) this.clients.get(arr[0]).destroy();
 	}
 	,init: function() {
