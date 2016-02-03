@@ -2,6 +2,7 @@
 import luxe.Input;
 import luxe.Vector.Vec;
 import luxe.options.EntityOptions;
+import luxe.Color;
 
 typedef WorldOptions = {
 
@@ -37,7 +38,9 @@ class World extends luxe.Entity {
           trace("new client");
           var sprite : luxe.Sprite = new luxe.Sprite({
             name: "sprite"+arr[0],
-            pos: Luxe.screen.mid
+            pos: Luxe.screen.mid,
+            size: new Vec(48,48),
+            color: new Color(Math.random(),Math.random(),Math.random())
           });
           var sName : luxe.Text = new luxe.Text({
             pos: new Vec(10,10),
@@ -45,12 +48,13 @@ class World extends luxe.Entity {
             parent: sprite,
             point_size: 36,
             align: luxe.Text.TextAlign.center,
-            color: new luxe.Color(0x000000)
+            color: new Color(0,0,0)
           });
           clients.set(arr[0],sprite);
         } else {
+          //trace(Utilities.vectorFromString(arr[1]));
           //trace(arr[1]);
-          //clients.get(arr[0]).pos =
+          clients.get(arr[0]).pos = Utilities.vectorFromString(arr[1]);
         }
       } else { //Sprite is dead
         if(clients.get(arr[0])!=null){

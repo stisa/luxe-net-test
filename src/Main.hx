@@ -1,5 +1,6 @@
 
 import luxe.Input;
+import luxe.Color;
 import luxe.Vector.Vec;
 
 class Main extends luxe.Game {
@@ -8,6 +9,8 @@ class Main extends luxe.Game {
   //TODO: refactor and move player, world to their own class, in folder entities, also move components to components folder
 
   var world : World;
+  var nameLabel : luxe.Text;
+
     override function config(config:luxe.AppConfig) {
 
         return config;
@@ -17,8 +20,12 @@ class Main extends luxe.Game {
     override function ready() {
       var player : luxe.Sprite = new luxe.Sprite({
         name: "sprite",
-        pos: Luxe.screen.mid
+        size: new Vec(48,48),
+        pos: Luxe.screen.mid,
+        color: new Color(Math.random(),Math.random(),Math.random())
+
       });
+
       trace("1- player sprite created");
       var clientC : Client = new Client({ name: "client" });
       var controllerC : Controller = new Controller({ name: "controller"});
@@ -26,6 +33,15 @@ class Main extends luxe.Game {
       player.add(controllerC);
       player.add(clientC);
       trace("4- player loaded");
+
+      nameLabel = new luxe.Text({
+        name: "nameLabel",
+        pos: new Vec(48,48),
+        text: "player name",
+        point_size: 36,
+        align: luxe.Text.TextAlign.left,
+        color: new Color(1,1,1)
+      });
 
       world = new World({name: "world", player : player});
       trace("8- world loaded");

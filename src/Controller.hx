@@ -5,7 +5,7 @@ import luxe.Input;
 //This component handles movement of the player
 class Controller extends Component {
 
-    override function onkeyup( e:KeyEvent ) {
+    override function onkeydown( e:KeyEvent ) {
 
         if(e.keycode == Key.key_r) {
         	trace("destroying "+this.entity.name);

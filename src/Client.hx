@@ -30,6 +30,8 @@ class Client extends Component {
         }else{ //The first data we receive should be this client id
           cId=event.data;
           this.entity.name = this.entity.name+cId;
+          var t = cast(Luxe.scene.get("nameLabel"),luxe.Text);
+          t.text = "You are: "+cId;
           //trace("3- "+this.entity.name+" connected");
         }
       }
@@ -43,7 +45,6 @@ class Client extends Component {
 
 
   override function update(dt:Float) {
-
     if (cId!="" && oldPos!=this.pos){ //only send position if  we are connected and it has changed
       // CHECK: if using fixed_step physics, update and fixed update could be out of sync?
       oldPos = this.pos;
