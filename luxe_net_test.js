@@ -193,7 +193,7 @@ Client.prototype = $extend(luxe_Component.prototype,{
 		this.socket.send(data);
 	}
 	,update: function(dt) {
-		if(this.cId != "" && this.oldPos != this.get_pos()) {
+		if(this.cId != "") {
 			this.oldPos = this.get_pos();
 			this.socket.send("" + Std.string(this.oldPos));
 		}
@@ -218,37 +218,13 @@ Controller.__super__ = luxe_Component;
 Controller.prototype = $extend(luxe_Component.prototype,{
 	onkeydown: function(e) {
 		if(e.keycode == snow_system_input_Keycodes.key_r) {
-			haxe_Log.trace("destroying " + this.get_entity().get_name(),{ fileName : "Controller.hx", lineNumber : 11, className : "Controller", methodName : "onkeydown"});
+			haxe_Log.trace("destroying " + this.get_entity().get_name(),{ fileName : "Controller.hx", lineNumber : 12, className : "Controller", methodName : "onkeydown"});
 			this.get_entity().destroy();
 		}
-		if(e.keycode == snow_system_input_Keycodes.key_w) this.set_pos((function($this) {
-			var $r;
-			var lhs = $this.get_pos();
-			var rhs = new phoenix_Vector(0,-10,null,null);
-			$r = new phoenix_Vector(lhs.x + rhs.x,lhs.y + rhs.y,lhs.z + rhs.z);
-			return $r;
-		}(this)));
-		if(e.keycode == snow_system_input_Keycodes.key_a) this.set_pos((function($this) {
-			var $r;
-			var lhs1 = $this.get_pos();
-			var rhs1 = new phoenix_Vector(-10,0,null,null);
-			$r = new phoenix_Vector(lhs1.x + rhs1.x,lhs1.y + rhs1.y,lhs1.z + rhs1.z);
-			return $r;
-		}(this)));
-		if(e.keycode == snow_system_input_Keycodes.key_s) this.set_pos((function($this) {
-			var $r;
-			var lhs2 = $this.get_pos();
-			var rhs2 = new phoenix_Vector(0,10,null,null);
-			$r = new phoenix_Vector(lhs2.x + rhs2.x,lhs2.y + rhs2.y,lhs2.z + rhs2.z);
-			return $r;
-		}(this)));
-		if(e.keycode == snow_system_input_Keycodes.key_d) this.set_pos((function($this) {
-			var $r;
-			var lhs3 = $this.get_pos();
-			var rhs3 = new phoenix_Vector(10,0,null,null);
-			$r = new phoenix_Vector(lhs3.x + rhs3.x,lhs3.y + rhs3.y,lhs3.z + rhs3.z);
-			return $r;
-		}(this)));
+		if(e.keycode == snow_system_input_Keycodes.key_w) luxe_tween_Actuate.tween(this.get_pos(),0.3,{ y : this.get_pos().y - 20});
+		if(e.keycode == snow_system_input_Keycodes.key_a) luxe_tween_Actuate.tween(this.get_pos(),0.3,{ x : this.get_pos().x - 20});
+		if(e.keycode == snow_system_input_Keycodes.key_s) luxe_tween_Actuate.tween(this.get_pos(),0.3,{ y : this.get_pos().y + 20});
+		if(e.keycode == snow_system_input_Keycodes.key_d) luxe_tween_Actuate.tween(this.get_pos(),0.3,{ x : this.get_pos().x + 20});
 	}
 	,init: function() {
 		luxe_Component.prototype.init.call(this);
@@ -965,7 +941,7 @@ var Utilities = function() { };
 $hxClasses["Utilities"] = Utilities;
 Utilities.__name__ = ["Utilities"];
 Utilities.vectorFromString = function(s) {
-	var r = new EReg("{ x:([0-9]+), y:([0-9]+), z:([0-9]+) }","i");
+	var r = new EReg("{ x:([+-]?[0-9]+[.]?[0-9]*), y:([+-]?[0-9]+[.]?[0-9]*), z:([+-]?[0-9]+[.]?[0-9]*) }","i");
 	r.match(s);
 	var tVec;
 	var _x = Std.parseFloat(r.matched(1));
@@ -1788,7 +1764,6 @@ WorldClient.__super__ = luxe_Component;
 WorldClient.prototype = $extend(luxe_Component.prototype,{
 	onadded: function() {
 		var _g = this;
-		var r = new EReg("^html","g");
 		this.socket = new WebSocket("ws://luxe-net-test.herokuapp.com");
 		this.socket.onopen = function(event) {
 			haxe_Log.trace("6- worldSocket open",{ fileName : "WorldClient.hx", lineNumber : 26, className : "WorldClient", methodName : "onadded"});
