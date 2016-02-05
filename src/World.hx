@@ -32,7 +32,7 @@ class World extends luxe.Entity {
     public function addClient(cIdPos:String){ //should rename to updateclients
       var arr = cIdPos.split("///");
       var pId =player.get("client").cId;
-
+      // id///pos///alive
       if (arr[2]=="true"){
         if ( pId!= "" && arr[0] != pId  &&  clients.get(arr[0])== null ){
           trace("new client");

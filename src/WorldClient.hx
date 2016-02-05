@@ -13,7 +13,7 @@ class WorldClient extends Component {
   var socket : js.html.WebSocket;
   var open: Bool = false;
   override function onadded() {
-    var r = ~/^html/g;
+    
 #if heroku
     //link to your server
     socket = new js.html.WebSocket("ws://luxe-net-test.herokuapp.com");

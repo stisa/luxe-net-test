@@ -48,7 +48,8 @@ class Client extends Component {
 
 
   override function update(dt:Float) {
-    if (cId!="" && oldPos!=this.pos){ //only send position if  we are connected and it has changed
+    if (cId!=""){ //only send position if  we are connected
+      // FIXME: Using tween, oldPos and newPos matched, can't avoid sending position even if it has not changed
       // CHECK: if using fixed_step physics, update and fixed update could be out of sync?
       oldPos = this.pos;
       socket.send(""+oldPos);
